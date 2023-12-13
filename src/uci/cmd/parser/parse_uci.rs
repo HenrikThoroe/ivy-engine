@@ -1,5 +1,7 @@
 use crate::uci::cmd::{command::Command, error::ParsingError};
 
+use super::single_token::try_single_token_cmd;
+
 /// Allows to parse a [Command] into an `uci` command.
 ///
 /// # Examples
@@ -14,22 +16,7 @@ use crate::uci::cmd::{command::Command, error::ParsingError};
 /// }
 /// ```
 pub fn try_parse_uci_cmd(cmd: &Command) -> Result<(), ParsingError> {
-  if cmd.tokens.len() != 1 {
-    return Err(ParsingError::InvalidLength {
-      min: 1,
-      max: 1,
-      got: cmd.tokens.len(),
-    });
-  }
-
-  if cmd.tokens[0] != "uci" {
-    return Err(ParsingError::InvalidCommandType {
-      expected: "uci",
-      got: cmd.tokens[0].to_string(),
-    });
-  }
-
-  Ok(())
+  try_single_token_cmd(cmd, "uci")
 }
 
 #[cfg(test)]
