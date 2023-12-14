@@ -1,0 +1,9 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "./Cargo.toml"
+  ],
+  "conventionalCommits.scopes": [
+    "assets",
+    "uci"
+  ]
+}
